@@ -65,7 +65,7 @@ public class PersonaAction extends ActionSupport {
 	}
 	
 	public Persona buscar(long ide){
-		personas = PersistentManager.getInstance();
+		//personas = PersistentManager.getInstance();
 		Persona p = new Persona(-1, "name", 10, "masculino");
 		for (int i=0;personas.size()>=i;i++){
 			if(personas.get(i).getId()==ide){
@@ -89,9 +89,8 @@ public class PersonaAction extends ActionSupport {
 		if (buscar(ide).getId() == -1){
 			addActionError("Id no encontrado");
 			return ERROR;
-		}else{
-			perMod = buscar(ide);
 		}
+		perMod = buscar(ide);
 		return SUCCESS;
 	}
 	
@@ -99,10 +98,8 @@ public class PersonaAction extends ActionSupport {
 		personas = PersistentManager.getInstance();
 		perMod = PersonaPorModificarse.getInstance();
 		int edad = 0;
-		long varIde = perMod.getId();
 		Persona p;
 
-		personas.remove(perMod);
 		
 		try{
 			edad = Integer.parseInt(age);
@@ -111,8 +108,9 @@ public class PersonaAction extends ActionSupport {
 			return ERROR;
 		}
 
-		p = new Persona(varIde, name, edad, gender);
+		p = new Persona(perMod.getId(), name, edad, gender);
 		personas.add(p);
+		personas.remove(perMod);
 		name = "";
 		age = "";
 		return SUCCESS;
@@ -158,6 +156,13 @@ public class PersonaAction extends ActionSupport {
 	public void setPersonas(List<Persona> personas) {
 		this.personas = personas;
 	}
-// aca terminan los getters y setters
-	
+
+	public Persona getPerMod() {
+		return perMod;
+	}
+
+	public void setPerMod(Persona perMod) {
+		this.perMod = perMod;
+	}
+	// aca terminan los getters y setters
 }
