@@ -57,6 +57,7 @@ public class PersonaAction extends ActionSupport {
 		}
 		if (buscar(ide).getId()!= -1){
 			personas.remove(buscar(ide));
+			id="";
 		}else {
 			addActionError("Id no encontrado");
 			return ERROR;
@@ -65,7 +66,6 @@ public class PersonaAction extends ActionSupport {
 	}
 	
 	public Persona buscar(long ide){
-		//personas = PersistentManager.getInstance();
 		Persona p = new Persona(-1, "name", 10, "masculino");
 		for (int i=0;personas.size()>=i;i++){
 			if(personas.get(i).getId()==ide){
@@ -96,10 +96,9 @@ public class PersonaAction extends ActionSupport {
 	
 	public String modificar(){
 		personas = PersistentManager.getInstance();
-		perMod = PersonaPorModificarse.getInstance();
+		//perMod = PersonaPorModificarse.getInstance();
 		int edad = 0;
 		Persona p;
-
 		
 		try{
 			edad = Integer.parseInt(age);
@@ -108,9 +107,9 @@ public class PersonaAction extends ActionSupport {
 			return ERROR;
 		}
 
-		p = new Persona(perMod.getId(), name, edad, gender);
+		p = new Persona(perMod.getId(), name, edad, gender);//
 		personas.add(p);
-		personas.remove(perMod);
+		personas.remove(buscar(perMod.getId()));
 		name = "";
 		age = "";
 		return SUCCESS;

@@ -18,7 +18,7 @@
 			<s:submit></s:submit>
 			<s:actionerror/>
 		</s:form>
-	</div>
+	</div>  
 	<br></br>
 	<hr></hr>
 	<div>
@@ -44,7 +44,7 @@
 	<div>
 		<h3>Eliminar de la lista</h3>
 		<s:form action="delete">
-			<s:textfield key="id"></s:textfield>
+			<s:textfield label="Id" name="id"></s:textfield>
 			<s:submit></s:submit>
 		</s:form>
 	</div>
